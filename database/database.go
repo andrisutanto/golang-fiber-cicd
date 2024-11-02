@@ -11,7 +11,7 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	dsn := "root:@tcp(127.0.0.1:3306)/golang-fiber-cicd?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "golang-fiber-cicd:piDKpyxKEXya3msh@tcp(172.17.0.2:3306)/golang-fiber-cicd?charset=utf8mb4&parseTime=True&loc=Local"
 	connection, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect to database!")
