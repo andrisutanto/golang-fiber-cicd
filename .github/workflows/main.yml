@@ -50,5 +50,10 @@ jobs:
             echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
             echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
 
+            cat .env
+
             docker pull ${{ vars.IMAGE_NAME }}
-            docker run -d -p 3000:3000 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }} --env-file .env
+            docker run -d -p 3000:3000 \
+              --name ${{ vars.CONTAINER_NAME }} \
+              --env-file .env \
+              ${{ vars.IMAGE_NAME }}
