@@ -3,7 +3,6 @@ package database
 import (
 	"fmt"
 	"golang-fiber-cicd/models"
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -14,9 +13,8 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if _, err := os.Stat(".env"); err == nil {
+		_ = godotenv.Load()
 	}
 
 	// Get the environment variables for the DSN
