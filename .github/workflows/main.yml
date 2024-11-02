@@ -42,5 +42,13 @@ jobs:
           script: |
             whoami
             docker stop golang-fiber-cicd || true && docker rm golang-fiber-cicd || true
+
+            # Create .env file on the VPS
+            echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+            echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+            echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+            echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+
             docker pull ${{ vars.IMAGE_NAME }}
-            docker run -d -p 3000:3000 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
+            docker run -d -p 3000:3000 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }} --env-file .env
